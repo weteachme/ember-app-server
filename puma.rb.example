@@ -1,0 +1,6 @@
+pidfile '/home/checkin/site/sinatra/tmp/puma.pid'
+state_path '/home/checkin/site/sinatra/tmp/puma.state'
+stdout_redirect '/home/checkin/site/sinatra/log/puma.log', '/home/checkin/site/sinatra/log/puma.log', true
+threads 2, 2
+bind 'unix:///tmp/checkin.sock'
+workers 2
