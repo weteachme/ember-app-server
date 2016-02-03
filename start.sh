@@ -1,6 +1,6 @@
 mkdir -p tmp/puma
-mkdir  log
-mkdir  vendor
+mkdir -p log
+mkdir -p vendor
 
 bundle install --path vendor/bundle
 
