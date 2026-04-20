@@ -16,7 +16,9 @@ class Pumatra < Sinatra::Base
     content_type 'text/html'
     version = params[:version] || ''
     version = ':' + version if version != ''
-    File.read("/ember-app/index.html#{version}")
+    path = "/ember-app/index.html#{version}"
+    halt 503, 'App not ready — index.html not found' unless File.exist?(path)
+    File.read(path)
   end
 
   run! if app_file == $0
