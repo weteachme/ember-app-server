@@ -1,0 +1,13 @@
+#!/bin/bash
+# Fix /data/ember-app permissions after Kamal deploy
+# Docker creates volume mount directories as root:root.
+# Run this after every deploy so ec2-user can write index.html.
+#
+# Usage: ssh ec2-user@<server> 'bash -s' < bin/setup-server
+
+set -euo pipefail
+
+sudo chown -R ec2-user:ec2-user /data/ember-app
+
+echo "Done. Verifying:"
+ls -la /data/ember-app/

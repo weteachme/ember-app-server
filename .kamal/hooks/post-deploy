@@ -1,0 +1,4 @@
+#!/bin/sh
+# Fix volume mount permissions after deploy
+# Docker creates /data/ember-app/* as root:root
+ssh ec2-user@$KAMAL_HOSTS 'sudo chown -R ec2-user:ec2-user /data/ember-app'
