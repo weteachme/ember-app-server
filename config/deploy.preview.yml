@@ -1,0 +1,20 @@
+# Kamal configuration for ember-app-server (Preview)
+# Usage: SERVICE_NAME=my-ember-app HOST=dashboard-preview.weteachme.com kamal deploy -c config/deploy.preview.yml
+service: <%= ENV['SERVICE_NAME'] %>
+image: weteachme/ember-app-server
+
+# Preview server
+servers:
+  - preview-host-t4g-large.taildbf88f.ts.net
+
+proxy:
+  ssl: true
+  host: <%= ENV['HOST'] %>
+  app_port: 3000
+  healthcheck:
+    path: /
+    interval: 5
+    timeout: 5
+
+# Volume mount for preview: /data/ember-app/<SERVICE_NAME>
+volume: /data/ember-app/<%= ENV['SERVICE_NAME'] %>:/app

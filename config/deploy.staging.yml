@@ -1,0 +1,19 @@
+# Kamal configuration for ember-app-server (Staging)
+service: ember-app-server-staging
+image: weteachme/ember-app-server
+
+# Staging server
+servers:
+  - preview-host-t4g-large.taildbf88f.ts.net
+
+proxy:
+  ssl: true
+  host: dashboard-staging.weteachme.com
+  app_port: 3000
+  healthcheck:
+    path: /
+    interval: 5
+    timeout: 5
+
+# Volume mount for staging
+volume: /data/ember-app:/app
