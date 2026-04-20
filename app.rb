@@ -7,6 +7,11 @@ configure {
 }
 
 class Pumatra < Sinatra::Base
+  get '/up' do
+    status 200
+    body 'OK'
+  end
+
   get '/*' do
     content_type 'text/html'
     version = params[:version] || ''
