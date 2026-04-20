@@ -1,6 +1,7 @@
-pidfile '/data/ember-app/tmp/puma.pid'
-state_path '/data/ember-app/tmp/puma.state'
-stdout_redirect '/data/ember-app/log/puma.log', '/data/ember-app/log/puma.log', true
-threads 2, 2
-bind 'tcp://0.0.0.0:3000'
-workers 2
+max_threads = ENV.fetch("MAX_THREADS", 5).to_i
+min_threads = ENV.fetch("MIN_THREADS", max_threads).to_i
+threads min_threads, max_threads
+
+workers ENV.fetch("WEB_CONCURRENCY", 2).to_i
+port ENV.fetch("PORT", 3000)
+environment ENV.fetch("RACK_ENV", "production")

@@ -11,7 +11,7 @@ class Pumatra < Sinatra::Base
     content_type 'text/html'
     version = params[:version] || ''
     version = ':' + version if version != ''
-    File.read("../app/index.html#{version}")
+    File.read("/ember-app/index.html#{version}")
   end
 
   run! if app_file == $0

@@ -1,19 +1,30 @@
-# Kamal configuration for ember-app-server (Staging - default)
-service: ember-app-server-staging
+# Kamal configuration for ember-app-server (Production)
+service: <%= ENV['SERVICE_NAME'] || 'ember-app-server' %>
 image: weteachme/ember-app-server
 
-# Staging server
+registry:
+  server: 163645997305.dkr.ecr.ap-southeast-2.amazonaws.com
+  username: AWS
+  password: <%= ENV["KAMAL_REGISTRY_PASSWORD"] || `aws ecr get-login-password --region ap-southeast-2`.strip %>
+
+# servers
 servers:
-  - preview-host-t4g-large.taildbf88f.ts.net
+  - wtm-mcp-servers.taildbf88f.ts.net
 
 proxy:
   ssl: true
-  host: dashboard-staging.weteachme.com
   app_port: 3000
   healthcheck:
     path: /
     interval: 5
     timeout: 5
 
-# Volume mount for staging
-volume: /data/ember-app:/app
+ssh:
+  user: ec2-user
+  keys: ["~/.ssh/aws-wtm.pem"]
+
+builder:
+  dockerfile: Dockerfile
+  context: .
+  arch: amd64
+

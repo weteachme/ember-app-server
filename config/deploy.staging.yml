@@ -1,0 +1,10 @@
+# Kamal configuration for ember-app-server (Staging - default)
+service: ember-app-server-staging
+
+proxy:
+  host: dashboard-staging.weteachme.com
+
+# Volume mount: host folder -> container /app
+# Sinatra app reads ../app/index.html relative to /app
+volumes:
+  - /data/ember-app/staging:/ember-app

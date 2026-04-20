@@ -3,18 +3,9 @@
 service: <%= ENV['SERVICE_NAME'] %>
 image: weteachme/ember-app-server
 
-# Preview server
-servers:
-  - preview-host-t4g-large.taildbf88f.ts.net
-
 proxy:
-  ssl: true
   host: <%= ENV['HOST'] %>
-  app_port: 3000
-  healthcheck:
-    path: /
-    interval: 5
-    timeout: 5
 
 # Volume mount for preview: /data/ember-app/<SERVICE_NAME>
-volume: /data/ember-app/<%= ENV['SERVICE_NAME'] %>:/app
+volumes:
+  - /data/ember-app/<%= ENV['SERVICE_NAME'] %>:/ember-app
