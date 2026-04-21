@@ -4,7 +4,6 @@ service: ember-app-server-staging
 proxy:
   host: dashboard-staging.weteachme.com
 
-# Volume mount: host folder -> container /app
-# Sinatra app reads ../app/index.html relative to /app
-volumes:
-  - /data/ember-app/staging:/ember-app
+env:
+  clear:
+    S3_KEY: staging/index.html

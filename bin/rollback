@@ -1,0 +1,17 @@
+#!/bin/bash
+set -e
+
+SUBDOMAIN=$1
+SECRET_KEY=$2
+STEP=${3:-1}
+
+if [ -z "$SUBDOMAIN" ] || [ -z "$SECRET_KEY" ]; then
+  echo "Usage: bin/rollback <subdomain> <secret_key> [step]"
+  echo "Example: bin/rollback dashboard-staging mysecret 1"
+  exit 1
+fi
+
+URL="https://${SUBDOMAIN}.weteachme.com/rollback?step=${STEP}"
+
+echo "Rolling back ${SUBDOMAIN}.weteachme.com by ${STEP} step(s)..."
+curl -s -X POST "${URL}" -H "X-Secret-Key: ${SECRET_KEY}" | python3 -m json.tool

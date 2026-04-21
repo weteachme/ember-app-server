@@ -4,6 +4,6 @@ service: ember-app-server-production
 proxy:
   host: dashboard.weteachme.com
 
-# Volume mount for staging
-volumes:
-  - /data/ember-app/production:/ember-app
+env:
+  clear:
+    S3_KEY: production/index.html

@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+
+SUBDOMAIN=$1
+SECRET_KEY=$2
+
+if [ -z "$SUBDOMAIN" ] || [ -z "$SECRET_KEY" ]; then
+  echo "Usage: bin/clear-cache <subdomain> <secret_key>"
+  echo "Example: bin/clear-cache dashboard-staging mysecret"
+  exit 1
+fi
+
+URL="https://${SUBDOMAIN}.weteachme.com/cache/clear"
+
+echo "Clearing cache on ${SUBDOMAIN}.weteachme.com..."
+curl -s -X POST "${URL}" -H "X-Secret-Key: ${SECRET_KEY}" | python3 -m json.tool

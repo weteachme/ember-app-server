@@ -6,6 +6,6 @@ image: weteachme/ember-app-server
 proxy:
   host: <%= ENV['HOST'] %>
 
-# Volume mount for preview: /data/ember-app/<SERVICE_NAME>
-volumes:
-  - /data/ember-app/<%= ENV['SERVICE_NAME'] %>:/ember-app
+env:
+  clear:
+    S3_KEY: preview/index.html
